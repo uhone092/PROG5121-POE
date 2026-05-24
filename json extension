@@ -1,0 +1,269 @@
+{
+  "LoginTest": {
+    "package": "com.mycompany.login",
+    "imports": [
+      "org.junit.Before",
+      "org.junit.After",
+      "org.junit.Test",
+      "org.junit.Assert"
+    ],
+    "testData": {
+      "message1": {
+        "recipient": "+27718693002",
+        "content": "Hi Mike, can you join us for dinner tonight"
+      },
+      "message2": {
+        "recipient": "08575975889",
+        "content": "Hi keegan, did you receive the payment?"
+      }
+    },
+    "helperMethods": [
+      "validateMessageLength",
+      "validateRecipientCell",
+      "processMessageAction"
+    ],
+    "testCategories": {
+      "constructorTests": [
+        "testMessageConstructor_ValidInputs",
+        "testMessageConstructor_EmptyMessage",
+        "testMessageConstructor_EmptyRecipient",
+        "testMessageConstructor_NullValues"
+      ],
+      "getterTests": [
+        "testGetRecipient",
+        "testGetMessageContent",
+        "testGetMessageID",
+        "testGetMessageHash"
+      ],
+      "validationTests": [
+        "testMessageLengthValidation_Success",
+        "testMessageLengthValidation_Failure",
+        "testMessageLengthValidation_ExactLimit",
+        "testRecipientValidation_Success",
+        "testRecipientValidation_Failure",
+        "testRecipientValidation_EdgeCases"
+      ],
+      "hashTests": [
+        "testMessageHashCorrectness",
+        "testMessageHashSingleWord"
+      ],
+      "idTests": [
+        "testMessageIDCreation",
+        "testMessageIDUniqueness"
+      ],
+      "actionTests": [
+        "testMessageAction_Send",
+        "testMessageAction_Disregard",
+        "testMessageAction_Store",
+        "testMessageAction_Invalid"
+      ],
+      "totalMessageTests": [
+        "testTotalMessagesSent",
+        "testTotalMessagesReset"
+      ],
+      "completeFlowTests": [
+        "testCompleteMessageFlow_Message1",
+        "testCompleteMessageFlow_Message2"
+      ],
+      "edgeCaseTests": [
+        "testSpecialCharacters",
+        "testMessageWithNewLines",
+        "testMultipleMessages",
+        "testStaticMethodsIndependence"
+      ]
+    }
+  }
+}
+{
+  "LoginSystem": {
+    "classes": {
+      "Login": {
+        "fields": [
+          "accountDatabase (Map<String, AccountDetails>)",
+          "chatHistory (List<MessageLog>)",
+          "messagesList (List<Message>)",
+          "currentLoggedInUser (AccountDetails)"
+        ],
+        "methods": [
+          "main",
+          "displayWelcomeBanner",
+          "displayMainMenu",
+          "createNewAccount",
+          "authenticateUser",
+          "startQuickChatSession",
+          "displayQuickChatMenu",
+          "sendMessage",
+          "displayMessageDetails",
+          "showRecentMessages"
+        ]
+      },
+      "AccountDetails": {
+        "fields": [
+          "identifier",
+          "securityCode",
+          "contactNumber",
+          "givenName",
+          "familyName",
+          "creationDate"
+        ],
+        "methods": [
+          "verifyCredentials",
+          "getIdentifier",
+          "getContactNumber",
+          "getGivenName",
+          "getFamilyName",
+          "getCreationDate"
+        ]
+      },
+      "AccountValidator": {
+        "methods": [
+          "isValidIdentifier",
+          "isValidSecurityCode",
+          "isValidContactNumber"
+        ]
+      },
+      "MessageLog": {
+        "fields": [
+          "sender",
+          "content",
+          "timestamp"
+        ],
+        "methods": [
+          "getSender",
+          "getContent",
+          "getTimestamp",
+          "getFormattedMessage"
+        ]
+      },
+      "Message": {
+        "fields": [
+          "messageID",
+          "recipient",
+          "messageContent",
+          "messageHash",
+          "numMessagesSent",
+          "totalMessagesSent"
+        ],
+        "methods": [
+          "generateMessageID",
+          "checkMessageID",
+          "checkRecipientCell",
+          "createMessageHash",
+          "storeMessage",
+          "getMessageID",
+          "getRecipient",
+          "getMessageContent",
+          "getMessageHash",
+          "getTotalMessagesSent",
+          "resetTotalMessagesSent",
+          "incrementTotalMessages"
+        ]
+      }
+    },
+    "jsonStorageExample": {
+      "messageID": "1234567890",
+      "messageHash": "12:1:HELLO_WORLD",
+      "recipient": "+27123456789",
+      "messageContent": "Hello World",
+      "numMessagesSent": 1,
+      "timestamp": "2026-05-24 20:17:00"
+    }
+  }
+}
+{
+  "LoginSystem": {
+    "classes": {
+      "Login": {
+        "fields": [
+          "accountDatabase (Map<String, AccountDetails>)",
+          "chatHistory (List<MessageLog>)",
+          "messagesList (List<Message>)",
+          "currentLoggedInUser (AccountDetails)"
+        ],
+        "methods": [
+          "main",
+          "displayWelcomeBanner",
+          "displayMainMenu",
+          "createNewAccount",
+          "authenticateUser",
+          "startQuickChatSession",
+          "displayQuickChatMenu",
+          "sendMessage",
+          "displayMessageDetails",
+          "showRecentMessages"
+        ]
+      },
+      "AccountDetails": {
+        "fields": [
+          "identifier",
+          "securityCode",
+          "contactNumber",
+          "givenName",
+          "familyName",
+          "creationDate"
+        ],
+        "methods": [
+          "verifyCredentials",
+          "getIdentifier",
+          "getContactNumber",
+          "getGivenName",
+          "getFamilyName",
+          "getCreationDate"
+        ]
+      },
+      "AccountValidator": {
+        "methods": [
+          "isValidIdentifier",
+          "isValidSecurityCode",
+          "isValidContactNumber"
+        ]
+      },
+      "MessageLog": {
+        "fields": [
+          "sender",
+          "content",
+          "timestamp"
+        ],
+        "methods": [
+          "getSender",
+          "getContent",
+          "getTimestamp",
+          "getFormattedMessage"
+        ]
+      },
+      "Message": {
+        "fields": [
+          "messageID",
+          "recipient",
+          "messageContent",
+          "messageHash",
+          "numMessagesSent",
+          "totalMessagesSent"
+        ],
+        "methods": [
+          "generateMessageID",
+          "checkMessageID",
+          "checkRecipientCell",
+          "createMessageHash",
+          "storeMessage",
+          "getMessageID",
+          "getRecipient",
+          "getMessageContent",
+          "getMessageHash",
+          "getTotalMessagesSent",
+          "resetTotalMessagesSent",
+          "incrementTotalMessages"
+        ]
+      }
+    },
+    "jsonStorageExample": {
+      "messageID": "1234567890",
+      "messageHash": "12:1:HELLO_WORLD",
+      "recipient": "+27123456789",
+      "messageContent": "Hello World",
+      "numMessagesSent": 1,
+      "timestamp": "2026-05-24 20:17:00"
+    }
+  }
+}
+
